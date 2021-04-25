@@ -9,8 +9,13 @@ export const userreducer = createSlice({
   initialState,
   reducers: {
     userinfo: (state, action) => {
-      state = [action.payload];
-      return state;
+      if (action.payload) {
+        state = [action.payload];
+        return state;
+      } else {
+        state = [];
+        return [...state];
+      }
     },
   },
 });

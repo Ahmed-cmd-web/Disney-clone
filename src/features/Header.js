@@ -1,14 +1,26 @@
 /** @format */
 import { auth, google } from "./firebase";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { userinfo } from "./reducer";
 
-function Header() {
+function Header(props) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [logged, setlogged] = useState(false);
+  useEffect(() => {
+    if (logged === false) {
+      setlogged(true);
+    } else {
+      setlogged(false);
+    }
+  }, [props.props.r]);
+  console.log(logged);
+
+  console.log(props.props.r);
+  const img = props.props.r[0];
   const signinwithgoogle = () =>
     auth
       .signInWithPopup(google)
@@ -17,7 +29,12 @@ function Header() {
         history.push("/home");
       })
       .catch((e) => console.log(e.message));
-
+  const signout = () => {
+    auth.signOut().then(() => {
+      dispatch(userinfo());
+      history.push("/");
+    });
+  };
   return (
     <Container>
       <Left>
@@ -25,34 +42,43 @@ function Header() {
         <Logo src="images/logo.svg" alt="" />
         <Headeropt>
           {" "}
-          <Icon src="/images/home-icon.svg" alt="" /> HOME
+          <Icon src="/images/home-icon.svg" alt="" />
+          <span>HOME</span>
         </Headeropt>
         <Headeropt>
           {" "}
-          <Icon src="/images/search-icon.svg" alt="" /> SEARCH
+          <Icon src="/images/search-icon.svg" alt="" /> <span>SEARCH</span>
         </Headeropt>
         <Headeropt>
           {" "}
           <Icon src="/images/watchlist-icon.svg" alt="" />
-          WATCHLIST
+          <span>WATCHLIST</span>
         </Headeropt>
         <Headeropt>
           <Icon src="/images/original-icon.svg" alt="" />
-          ORIGINALS
+          <span>ORIGINALS</span>
         </Headeropt>
         <Headeropt>
           {" "}
           <Icon src="/images/movie-icon.svg" alt="" />
-          MOVIES
+          <span>MOVIES</span>
         </Headeropt>
         <Headeropt>
           <Icon src="/images/series-icon.svg" alt="" />
-          SERIES
+          <span>SERIES</span>
         </Headeropt>
       </Left>
       <Right>
         {" "}
-        <Loginbutton onClick={signinwithgoogle}>LOGIN</Loginbutton>
+        {logged ? (
+          <div>
+            {" "}
+            <Userimg src={img} alt="" />
+            <span onClick={signout}>Sign out</span>
+          </div>
+        ) : (
+          <Loginbutton onClick={signinwithgoogle}>LOGIN</Loginbutton>
+        )}
       </Right>
     </Container>
   );
@@ -69,6 +95,15 @@ const Container = styled.div`
   justify-content: space-between;
   padding-left: 35px;
   padding-right: 35px;
+`;
+const Userimg = styled.img`
+  width: 45px;
+  border-radius: 25px;
+  cursor: pointer;
+  &:hover ~ span {
+    opacity: 1;
+    visibility: visible;
+  }
 `;
 const Logo = styled.img`
   object-fit: scale-down;
@@ -96,14 +131,40 @@ const Loginbutton = styled.button`
   }
 `;
 const Headeropt = styled.span`
-  display: flex;
+  display: ${(props) => (props.props?.r[0] === "undefined" ? "none" : "flex")};
   align-items: center;
   letter-spacing: 1px;
   justify-content: space-around;
-  border-bottom: 1px solid white;
-  transition: width 0.5s ease;
+  @media (max-width: 800px) {
+    display: none;
+  }
+  span {
+    position: relative;
+    &:before {
+      background-color: white;
+      display: flex;
+      bottom: -6px;
+      content: "";
+      height: 2px;
+      left: 0px;
+      opacity: 0;
+      position: absolute;
+      right: 0px;
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+      visibility: hidden;
+      width: auto;
+      border-radius: 4px;
+    }
+  }
 
   &:hover {
+    span:before {
+      transform: scaleX(1);
+      visibility: visible;
+      opacity: 1;
+    }
   }
 `;
 const Left = styled.div`
@@ -119,5 +180,30 @@ const Icon = styled.img`
   height: 20px;
   padding-right: 10px;
 `;
-const Right = styled.div``;
-export default Header;
+const Right = styled.div`
+  display: flex;
+  position: relative;
+  span {
+    transition: all 0.5s ease;
+    border: 1px solid rgba(151, 151, 151, 0.34);
+    position: absolute;
+    font-size: 14px;
+    top: 45px;
+    right: 5px;
+    letter-spacing: 3px;
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    &:hover {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+`;
+
+const mapStateToProps = (state) => {
+  return { props: state };
+};
+export default connect(mapStateToProps)(Header);

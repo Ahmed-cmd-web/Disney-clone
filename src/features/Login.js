@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import store from "./store";
 function Login() {
-  console.log(store.getState());
+  
   return (
     <Container>
       <CTA>
