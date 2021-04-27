@@ -7,7 +7,7 @@ import Header from "./features/Header";
 import { auth } from "./features/firebase";
 import { useDispatch } from "react-redux";
 import { userinfo } from "./features/reducer";
-
+import Body from "./features/Body";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,10 +24,15 @@ function App() {
     <div className="App">
       <Router>
         {" "}
-        <Header />
         <Switch>
-          <Route path="/home"></Route>
+          <Route path="/home">
+            {" "}
+            <Header />
+            <Body />
+          </Route>
           <Route path="/">
+            {" "}
+            <Header />
             <Login />
           </Route>
         </Switch>

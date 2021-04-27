@@ -1,6 +1,6 @@
 /** @format */
 import { auth, google } from "./firebase";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
@@ -9,15 +9,6 @@ import { userinfo } from "./reducer";
 function Header(props) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [logged, setlogged] = useState(false);
-  useEffect(() => {
-    if (logged === false) {
-      setlogged(true);
-    } else {
-      setlogged(false);
-    }
-  }, [props.props.r]);
-  console.log(logged);
 
   console.log(props.props.r);
   const img = props.props.r[0];
@@ -35,50 +26,59 @@ function Header(props) {
       history.push("/");
     });
   };
+  console.log(img);
   return (
     <Container>
       <Left>
         {" "}
         <Logo src="images/logo.svg" alt="" />
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           {" "}
           <Icon src="/images/home-icon.svg" alt="" />
           <span>HOME</span>
         </Headeropt>
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           {" "}
           <Icon src="/images/search-icon.svg" alt="" /> <span>SEARCH</span>
         </Headeropt>
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           {" "}
           <Icon src="/images/watchlist-icon.svg" alt="" />
           <span>WATCHLIST</span>
         </Headeropt>
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           <Icon src="/images/original-icon.svg" alt="" />
           <span>ORIGINALS</span>
         </Headeropt>
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           {" "}
           <Icon src="/images/movie-icon.svg" alt="" />
           <span>MOVIES</span>
         </Headeropt>
-        <Headeropt>
+        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
           <Icon src="/images/series-icon.svg" alt="" />
           <span>SERIES</span>
         </Headeropt>
       </Left>
       <Right>
-        {" "}
-        {logged ? (
-          <div>
-            {" "}
-            <Userimg src={img} alt="" />
-            <span onClick={signout}>Sign out</span>
-          </div>
-        ) : (
-          <Loginbutton onClick={signinwithgoogle}>LOGIN</Loginbutton>
-        )}
+        <Userimg
+          src={img}
+          alt=""
+          style={img ? { display: "flex" } : { display: "none" }}
+        />
+        <span
+          style={img ? { display: "flex" } : { display: "none" }}
+          onClick={signout}
+        >
+          Sign out
+        </span>
+
+        <Loginbutton
+          onClick={signinwithgoogle}
+          style={img ? { display: "none" } : { display: "flex" }}
+        >
+          LOGIN
+        </Loginbutton>
       </Right>
     </Container>
   );
@@ -88,7 +88,8 @@ const Container = styled.div`
   background-color: black;
   height: 70px;
   width: 100%;
-  position: fixed;
+  position: sticky;
+  z-index: 99;
   top: 0;
   display: flex;
   align-items: center;
@@ -131,13 +132,13 @@ const Loginbutton = styled.button`
   }
 `;
 const Headeropt = styled.span`
-  display: ${(props) => (props.props?.r[0] === "undefined" ? "none" : "flex")};
   align-items: center;
   letter-spacing: 1px;
   justify-content: space-around;
-  @media (max-width: 800px) {
-    display: none;
+  @media only screen and (max-width: 800px) {
+    display: none !important ;
   }
+  
   span {
     position: relative;
     &:before {
