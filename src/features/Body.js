@@ -3,7 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import Sliderf from "./Slider";
-import  Sliderf2 from "./Sliderf2";
+
 function Body() {
   return (
     <Container>

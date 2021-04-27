@@ -42,20 +42,45 @@ export const Container = styled.div`
   .alice-carousel__prev-btn,
   .alice-carousel__next-btn {
     position: absolute;
-    top: 95px;
+
+    top: 0%;
     width: auto;
-    height: 0px;
-    font-size: 30px;
+    opacity: 0;
+    font-size: 10px;
+    height: 80%;
     border: none;
-    background-color: gainsboro;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition:all .2s ease;
+    padding-left:10px;
+    padding-right:10px;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .alice-carousel__next-btn {
     right: 0;
   }
+  .alice-carousel__next-btn-item,
+  .alice-carousel__prev-btn-item {
+    border: 1px solid white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+    height: 20px;
+    width: 20px;
+    color: black;
+  }
   .alice-carousel__prev-btn span,
   .alice-carousel__next-btn span {
-    border: 1px solid black;
+    &:hover {
+      color: black;
+    }
   }
 `;
 
