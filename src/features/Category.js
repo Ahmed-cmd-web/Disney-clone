@@ -7,29 +7,24 @@ function Category(props) {
   return (
     <CContainer>
       <Img src={props.img} alt="" />
-
-      <Video
-        autoPlay
-        muted
-        loop
-        src={props.vid}
-        type="video/mp4"
-      ></Video>
+      <Video autoPlay muted loop src={props.vid} type="video/mp4"></Video>
     </CContainer>
   );
 }
 
-const CContainer = styled.div`
+export const CContainer = styled.div`
   border: 3px solid rgba(249, 249, 249, 0.1);
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
 
   display: flex;
   justify-content: center;
   position: relative;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
   &:hover {
-    border: 3px solid white;
+    border: 3px solid rgba(249, 249, 249, 0.8);
     transform: scale(1.05);
     Video {
       opacity: 1;
@@ -37,9 +32,10 @@ const CContainer = styled.div`
   }
 `;
 
-const Img = styled.img`
+export const Img = styled.img`
   z-index: 99;
   width: 100%;
+  border-radius: 4%;
 
   left: 0px;
   right: 0px;

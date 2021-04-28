@@ -10,8 +10,7 @@ function Header(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log(props.props.r);
-  const img = props.props.r[0];
+  const img = props.props.r.user[0];
   const signinwithgoogle = () =>
     auth
       .signInWithPopup(google)
@@ -26,13 +25,15 @@ function Header(props) {
       history.push("/");
     });
   };
-  console.log(img);
   return (
     <Container>
       <Left>
         {" "}
-        <Logo src="images/logo.svg" alt="" />
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Logo src="images/logo.svg" onClick={() => history.push("/")} alt="" />
+        <Headeropt
+          style={img ? { display: "flex" } : { display: "none" }}
+          onClick={() => history.push("/home")}
+        >
           {" "}
           <Icon src="/images/home-icon.svg" alt="" />
           <span>HOME</span>
@@ -89,7 +90,7 @@ const Container = styled.div`
   height: 70px;
   width: 100%;
   position: sticky;
-  z-index: 99;
+  z-index: 90009;
   top: 0;
   display: flex;
   align-items: center;
@@ -138,7 +139,7 @@ const Headeropt = styled.span`
   @media only screen and (max-width: 800px) {
     display: none !important ;
   }
-  
+
   span {
     position: relative;
     &:before {
