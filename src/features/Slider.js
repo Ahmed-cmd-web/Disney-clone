@@ -25,7 +25,7 @@ function Sliderf() {
         autoPlay={true}
       >
         {images.map((i) => (
-          <Img src={i} alt="" className="sliderimg" />
+          <Img src={i} alt="" key={i} className="sliderimg" />
         ))}
       </AliceCarousel>
     </Container>
@@ -52,9 +52,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition:all .2s ease;
-    padding-left:10px;
-    padding-right:10px;
+    transition: all 0.2s ease;
+    padding-left: 10px;
+    padding-right: 10px;
 
     &:hover {
       opacity: 1;
