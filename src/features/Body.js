@@ -31,7 +31,6 @@ function Body() {
     },
   ];
   var select = useSelector(info);
-  setTimeout(()=>console.log(select),10000)
   return (
     <Container>
       <Sliderf />
@@ -41,29 +40,29 @@ function Body() {
         ))}
       </Content>
       <Subtitle>Recommended For You</Subtitle>
-      <Content style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      <Filmrow >
         {select.recommend.map((i) => (
           <Films key={i.title} info={i} />
         ))}
-      </Content>{" "}
+      </Filmrow>{" "}
       <Subtitle>New to Disney+</Subtitle>
-      <Content style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      <Filmrow >
         {select.new.map((i) => (
           <Films key={i.title} info={i} />
         ))}
-      </Content>
+      </Filmrow>
       <Subtitle>Originals</Subtitle>
-      <Content style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      <Filmrow >
         {select.originals.map((i) => (
           <Films key={i.title} info={i} />
         ))}
-      </Content>{" "}
+      </Filmrow>{" "}
       <Subtitle>Trending</Subtitle>
-      <Content style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      <Filmrow >
         {select.trending.map((i) => (
           <Films key={i.title} info={i} />
         ))}
-      </Content>
+      </Filmrow>
     </Container>
   );
 }
@@ -87,6 +86,7 @@ const Content = styled.div`
     justify-items: stretch;
     justify-content: end;
     margin-top: 30px;
+    margin-bottom: 30px;
   }
   @media only screen and (min-width: 801px) {
     display: inline-grid;
@@ -94,12 +94,32 @@ const Content = styled.div`
     column-gap: 25px;
     justify-content: center;
     margin-top: 30px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
   }
 `;
 const Subtitle = styled.span`
   align-self:flex-start;
   font-weight:bold;
 `
+
+const Filmrow = styled.div`
+  @media only screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    
+    justify-content: end;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  @media only screen and (min-width: 801px) {
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 25px;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+`;
 
 export default Body;

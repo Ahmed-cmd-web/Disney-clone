@@ -87,7 +87,7 @@ function Header(props) {
 
 const Container = styled.div`
   background-color: black;
-  height: 70px;
+  height: 10vh;
   width: 100%;
   position: sticky;
   z-index: 90009;

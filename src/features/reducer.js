@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: [],
+  currentlyviewed: [],
   recommend: [],
   new: [],
   originals: [],
@@ -42,9 +43,13 @@ export const userreducer = createSlice({
           return state;
       }
     },
+    view: (state, action) => {
+      state.currentlyviewed = [action.payload];
+      return state;
+    },
   },
 });
 
-export const { userinfo, movies } = userreducer.actions;
-export const info = (state) => state.r
+export const { userinfo, movies,view } = userreducer.actions;
+export const info = (state) => state.r;
 export default userreducer.reducer;

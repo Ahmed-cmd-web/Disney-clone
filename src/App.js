@@ -5,10 +5,10 @@ import "./App.css";
 import Login from "./features/Login";
 import Header from "./features/Header";
 import { auth, db } from "./features/firebase";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { userinfo, movies, info } from "./features/reducer";
+import {  useDispatch } from "react-redux";
+import { userinfo, movies } from "./features/reducer";
 import Body from "./features/Body";
-
+import Filmtemplate from './features/Filmtemplate'
 function App() {
   var list = [];
 
@@ -29,7 +29,7 @@ function App() {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           list.push(doc.data());
-          console.log("done");
+          
         });
         list.map((i) => dispatch(movies(i)));
       });
@@ -38,16 +38,17 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {" "}
+        <Header />{" "}
         <Switch>
+          <Route path='/filminfo'>
+            <Filmtemplate />
+          </Route>
           <Route path="/home">
             {" "}
-            <Header />
             <Body />
           </Route>
           <Route path="/">
             {" "}
-            <Header />
             <Login />
           </Route>
         </Switch>
