@@ -3,14 +3,13 @@ import { auth, google } from "./firebase";
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import { userinfo } from "./reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { info, userinfo } from "./reducer";
 
-function Header(props) {
+function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const img = props.props.r.user[0];
+  const img = useSelector(info).user;
   const signinwithgoogle = () =>
     auth
       .signInWithPopup(google)
@@ -21,7 +20,6 @@ function Header(props) {
       .catch((e) => console.log(e.message));
   const signout = () => {
     auth.signOut().then(() => {
-      dispatch(userinfo());
       history.push("/");
     });
   };
@@ -31,32 +29,42 @@ function Header(props) {
         {" "}
         <Logo src="images/logo.svg" onClick={() => history.push("/")} alt="" />
         <Headeropt
-          style={img ? { display: "flex" } : { display: "none" }}
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
           onClick={() => history.push("/home")}
         >
           {" "}
           <Icon src="/images/home-icon.svg" alt="" />
           <span>HOME</span>
         </Headeropt>
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Headeropt
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+        >
           {" "}
           <Icon src="/images/search-icon.svg" alt="" /> <span>SEARCH</span>
         </Headeropt>
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Headeropt
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+        >
           {" "}
           <Icon src="/images/watchlist-icon.svg" alt="" />
           <span>WATCHLIST</span>
         </Headeropt>
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Headeropt
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+        >
           <Icon src="/images/original-icon.svg" alt="" />
           <span>ORIGINALS</span>
         </Headeropt>
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Headeropt
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+        >
           {" "}
           <Icon src="/images/movie-icon.svg" alt="" />
           <span>MOVIES</span>
         </Headeropt>
-        <Headeropt style={img ? { display: "flex" } : { display: "none" }}>
+        <Headeropt
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+        >
           <Icon src="/images/series-icon.svg" alt="" />
           <span>SERIES</span>
         </Headeropt>
@@ -65,10 +73,10 @@ function Header(props) {
         <Userimg
           src={img}
           alt=""
-          style={img ? { display: "flex" } : { display: "none" }}
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
         />
         <span
-          style={img ? { display: "flex" } : { display: "none" }}
+          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
           onClick={signout}
         >
           Sign out
@@ -76,7 +84,7 @@ function Header(props) {
 
         <Loginbutton
           onClick={signinwithgoogle}
-          style={img ? { display: "none" } : { display: "flex" }}
+          style={img.length > 0 ? { display: "none" } : { display: "flex" }}
         >
           LOGIN
         </Loginbutton>
@@ -205,7 +213,4 @@ const Right = styled.div`
   }
 `;
 
-const mapStateToProps = (state) => {
-  return { props: state };
-};
-export default connect(mapStateToProps)(Header);
+export default Header;

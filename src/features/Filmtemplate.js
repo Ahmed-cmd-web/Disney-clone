@@ -7,7 +7,6 @@ import { info } from "./reducer";
 
 function Filmtemplate() {
   const filminfo = useSelector(info);
-  console.log(filminfo.currentlyviewed);
 
   return (
     <Container>
@@ -100,13 +99,13 @@ const Content2 = styled.div`
   button.add {
     margin-right: 16px;
     height: 44px;
-    width: 44px;
+    width: 15px;
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    align-self:center;
+    align-self: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 50%;
     border: 2px solid white;

@@ -21,7 +21,7 @@ export const userreducer = createSlice({
         return state;
       } else {
         state.user = [];
-        return [...state];
+        return state;
       }
     },
     movies: (state, action) => {
