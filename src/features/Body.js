@@ -73,7 +73,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 30px 0px 30px;
+  padding: 90px 30px 0px 30px;
   justify-content: space-between;
   background-size: cover;
   z-index:1;

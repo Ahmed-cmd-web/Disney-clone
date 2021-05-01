@@ -7,7 +7,9 @@ function Category(props) {
   return (
     <CContainer>
       <Img src={props.img} alt="" />
-      <Video autoPlay muted loop src={props.vid} type="video/mp4"></Video>
+      <Video autoPlay="autoplay" loop="loop" muted playsInline>
+        <source src={props.vid} type="video/mp4" />
+      </Video>
     </CContainer>
   );
 }
@@ -22,7 +24,7 @@ export const CContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  
+
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
   &:hover {
     border: 3px solid rgba(249, 249, 249, 0.8);
@@ -34,10 +36,9 @@ export const CContainer = styled.div`
 `;
 
 export const Img = styled.img`
-  z-index: 99;
+  z-index: 9;
   width: 100%;
   border-radius: 4%;
-
   left: 0px;
   right: 0px;
 `;

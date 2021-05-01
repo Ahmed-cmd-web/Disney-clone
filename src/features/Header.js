@@ -70,17 +70,20 @@ function Header() {
         </Headeropt>
       </Left>
       <Right>
-        <Userimg
-          src={img}
-          alt=""
-          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
-        />
-        <span
-          style={img.length > 0 ? { display: "flex" } : { display: "none" }}
-          onClick={signout}
-        >
-          Sign out
-        </span>
+        <Signout>
+          {" "}
+          <Userimg
+            src={img}
+            alt=""
+            style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+          />
+          <span
+            style={img.length > 0 ? { display: "flex" } : { display: "none" }}
+            onClick={signout}
+          >
+            Sign out
+          </span>
+        </Signout>
 
         <Loginbutton
           onClick={signinwithgoogle}
@@ -95,20 +98,35 @@ function Header() {
 
 const Container = styled.div`
   background-color: black;
-  height: 10vh;
+  height: 70px;
   width: 100%;
-  position: sticky;
-  z-index: 90009;
-  top: 0;
+  z-index: 9000;
+  position: fixed;
+  top: 0px;
+  margin-bottom: 290px;
   display: flex;
+
   align-items: center;
   justify-content: space-between;
-  padding-left: 35px;
-  padding-right: 35px;
+  padding: 5px 35px;
+`;
+const Signout = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
 `;
 const Userimg = styled.img`
-  width: 45px;
-  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  height: auto;
+  object-fit: scale-down;
+  border-radius: 100%;
   cursor: pointer;
   &:hover ~ span {
     opacity: 1;
@@ -117,8 +135,8 @@ const Userimg = styled.img`
 `;
 const Logo = styled.img`
   object-fit: scale-down;
-  height: 45px;
-  width: auto;
+  max-height: 70px;
+  width: 80px;
   cursor: pointer;
 `;
 const Loginbutton = styled.button`
@@ -183,6 +201,7 @@ const Left = styled.div`
   justify-content: space-between;
   flex: 0.7;
   font-size: 13px;
+  max-height: 100%;
   cursor: pointer;
 `;
 const Icon = styled.img`
@@ -193,6 +212,7 @@ const Icon = styled.img`
 const Right = styled.div`
   display: flex;
   position: relative;
+  max-height: 100%;
   span {
     transition: all 0.5s ease;
     border: 1px solid rgba(151, 151, 151, 0.34);

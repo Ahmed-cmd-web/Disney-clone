@@ -50,11 +50,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   position: relative;
+  padding-top:90px;
 `;
 const Content2 = styled.div`
   display: flex;
-
   width: 60%;
+  margin: 20px 0px;
 
   button.trailer {
     flex: 0.3;
@@ -123,12 +124,14 @@ const Content = styled.div`
     font-size: 20px;
     color: rgb(249, 249, 249);
     flex-wrap: wrap;
-    width: 75%;
+    width: 70%;
     margin: 0;
+
+    padding: 16px 0px;
     font-weight: normal;
   }
 
-  position: absolute;
+  position: relative;
   top: 72px;
   display: flex;
   flex-direction: column;
@@ -136,16 +139,28 @@ const Content = styled.div`
   justify-content: space-evenly;
   padding: 0px calc(3.5vw + 5px);
   width: 100%;
-  height: 90%;
+  height: 70%;
+
   margin: 0px auto;
 
   img {
     width: 40%;
     object-fit: scale-down;
   }
+  @media only screen and (max-width: 700px) {
+    font-size: auto;
+  }
 `;
 const Img = styled.img`
-  width: 100%;
+  position: fixed;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  top:0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding-top:70px;
   opacity: 0.8;
   height: 100%;
   z-index: -99;
