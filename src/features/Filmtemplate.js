@@ -1,23 +1,21 @@
 /** @format */
 
 import React from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { info } from "./reducer";
 
 function Filmtemplate() {
-  const filminfo = useSelector(info);
+  const local = JSON.parse(localStorage.getItem("info"));
 
   return (
     <Container>
       <Img
-        src={filminfo.currentlyviewed[0]?.backgroundImg}
-        alt={filminfo.currentlyviewed[0]?.title}
+        src={local.backgroundImg}
+        alt={local.title}
       />
       <Content>
         <img
-          src={filminfo.currentlyviewed[0]?.titleImg}
-          alt={filminfo.currentlyviewed[0]?.title}
+          src={local.titleImg}
+          alt={local.title}
         />
         <Content2>
           <button style={{ flex: "0.2" }}>
@@ -37,8 +35,8 @@ function Filmtemplate() {
             <img src="/images/group-icon.png" alt="" />
           </button>
         </Content2>
-        <span>{filminfo.currentlyviewed[0]?.subTitle}</span>
-        <h4>{filminfo.currentlyviewed[0]?.description}</h4>
+        <span>{local.subTitle}</span>
+        <h4>{local.description}</h4>
       </Content>
     </Container>
   );
@@ -50,7 +48,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  padding-top:90px;
+  padding-top: 90px;
 `;
 const Content2 = styled.div`
   display: flex;
@@ -156,11 +154,11 @@ const Img = styled.img`
   background-size: cover;
   height: 100vh;
   width: 100vw;
-  top:0;
+  top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  padding-top:70px;
+  padding-top: 70px;
   opacity: 0.8;
   height: 100%;
   z-index: -99;

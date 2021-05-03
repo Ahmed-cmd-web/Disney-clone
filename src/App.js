@@ -11,7 +11,8 @@ import Body from "./features/Body";
 import Filmtemplate from './features/Filmtemplate'
 function App() {
   var list = [];
-
+  
+  
   const dispatch = useDispatch();
 
   //console.log(props.props.r.new);
@@ -34,7 +35,7 @@ function App() {
         list.map((i) => dispatch(movies(i)));
       });
   });
-
+ 
   return (
     <div className="App">
       <Router>
