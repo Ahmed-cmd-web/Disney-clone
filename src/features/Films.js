@@ -5,7 +5,7 @@ import { CContainer, Img } from "./Category";
 import { useDispatch } from "react-redux";
 import { view } from "./reducer";
 import { useHistory } from "react-router-dom";
-
+import LazyLoad from "react-lazyload";
 function Films(props) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -17,7 +17,12 @@ function Films(props) {
 
   return (
     <CContainer onClick={filminfo}>
-      <Img src={props.info.cardImg} alt={props.info.title} />
+      <LazyLoad height={"100%"} preventLoading={true}>
+        <Img
+          src={props.info.cardImg}
+          alt={props.info.title}
+        />
+      </LazyLoad>
     </CContainer>
   );
 }
